@@ -3,22 +3,24 @@ package br.com.carrinhotdd;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CarrinhoTest {
 
     @Test
-    void adicionarItemDeveAumentarOTotal() {
+    void naoDeveAdicionarQuantidadeMaiorQueEstoque() {
 
         Carrinho carrinho = new Carrinho();
 
         Produto produto = new Produto(
                 "Camiseta",
                 50.0,
-                10
+                5
         );
 
-        carrinho.adicionarItem(produto, 2);
-
-        assertEquals(100.0, carrinho.calcularTotal());
+        assertThrows(
+                EstoqueInsuficienteException.class,
+                () -> carrinho.adicionarItem(produto, 6)
+        );
     }
 }
