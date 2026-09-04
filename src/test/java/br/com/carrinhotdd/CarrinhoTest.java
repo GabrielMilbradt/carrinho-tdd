@@ -10,30 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class CarrinhoTest {
 
     @Test
-    void naoDeveAplicarMesmoCupomDuasVezes()
-            throws EstoqueInsuficienteException,
-            CupomJaAplicadoException {
+    void naoDeveFinalizarCarrinhoVazio() {
 
         Carrinho carrinho = new Carrinho();
 
-        Produto produto = new Produto(
-                "Camiseta",
-                100.0,
-                10
-        );
-
-        carrinho.adicionarItem(produto, 1);
-
-        Cupom cupom = new Cupom(
-                "DESCONTO10",
-                10
-        );
-
-        carrinho.aplicarCupom(cupom);
-
         assertThrows(
-                CupomJaAplicadoException.class,
-                () -> carrinho.aplicarCupom(cupom)
+                CarrinhoVazioException.class,
+                () -> carrinho.finalizarCompra()
         );
     }
 }
