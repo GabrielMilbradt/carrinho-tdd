@@ -8,6 +8,13 @@ public class Carrinho {
 
     private List<ItemCarrinho> itens = new ArrayList<>();
 
+    public void removerItem(Produto produto) {
+
+        itens.removeIf(
+                item -> item.getProduto() == produto
+        );
+    }
+
     public void adicionarItem(Produto produto, int quantidade)
             throws EstoqueInsuficienteException {
 
