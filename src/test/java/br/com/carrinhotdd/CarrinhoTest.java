@@ -7,9 +7,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CarrinhoTest {
 
     @Test
-    void carrinhoVazioTemTotalZero() {
+    void adicionarItemDeveAumentarOTotal() {
+
         Carrinho carrinho = new Carrinho();
 
-        assertEquals(0.0, carrinho.calcularTotal());
+        Produto produto = new Produto(
+                "Camiseta",
+                50.0,
+                10
+        );
+
+        carrinho.adicionarItem(produto, 2);
+
+        assertEquals(100.0, carrinho.calcularTotal());
     }
 }
