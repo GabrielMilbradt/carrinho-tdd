@@ -9,23 +9,27 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class CarrinhoTest {
 
     @Test
-    void removerItemDeveReduzirOTotal()
-            throws EstoqueInsuficienteException {
+    void aplicarCupomDeveReduzirTotal()
+            throws EstoqueInsuficienteException,
+            CupomJaAplicadoException {
 
         Carrinho carrinho = new Carrinho();
 
         Produto produto = new Produto(
                 "Camiseta",
-                50.0,
+                100.0,
                 10
         );
 
-        carrinho.adicionarItem(produto, 2);
+        carrinho.adicionarItem(produto, 1);
 
-        assertEquals(100.0, carrinho.calcularTotal());
+        Cupom cupom = new Cupom(
+                "DESCONTO10",
+                10
+        );
 
-        carrinho.removerItem(produto);
+        carrinho.aplicarCupom(cupom);
 
-        assertEquals(0.0, carrinho.calcularTotal());
+        assertEquals(90.0, carrinho.calcularTotal());
     }
 }
