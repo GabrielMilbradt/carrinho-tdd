@@ -1,5 +1,6 @@
 package br.com.carrinhotdd;
 
+import br.com.carrinhotdd.exceptions.CarrinhoVazioException;
 import br.com.carrinhotdd.exceptions.CupomJaAplicadoException;
 import br.com.carrinhotdd.exceptions.EstoqueInsuficienteException;
 import java.util.ArrayList;
@@ -8,6 +9,17 @@ import java.util.List;
 public class Carrinho {
     private List<ItemCarrinho> itens = new ArrayList<>();
     private Cupom cupom;
+
+    public void finalizarCompra()
+            throws CarrinhoVazioException {
+
+
+        if (itens.isEmpty()) {
+            throw new CarrinhoVazioException(
+                    "Não é possível finalizar um carrinho vazio."
+            );
+        }
+    }
 
     public void aplicarCupom(Cupom cupom)
             throws CupomJaAplicadoException {
