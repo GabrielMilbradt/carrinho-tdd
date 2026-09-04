@@ -9,7 +9,15 @@ public class Carrinho {
     private List<ItemCarrinho> itens = new ArrayList<>();
     private Cupom cupom;
 
-    public void aplicarCupom(Cupom cupom) throws CupomJaAplicadoException {
+    public void aplicarCupom(Cupom cupom)
+            throws CupomJaAplicadoException {
+
+        if (this.cupom != null) {
+            throw new CupomJaAplicadoException(
+                    "Cupom já aplicado."
+            );
+        }
+
         this.cupom = cupom;
     }
 
@@ -17,10 +25,6 @@ public class Carrinho {
         double total = 0.0;
         for (ItemCarrinho item : itens) {
             total += item.getProduto().getPreco() * item.getQuantidade();
-        }
-
-        if (cupom != null) {
-            total = total - (total * cupom.getPercentualDesconto() / 100);
         }
 
         return total;
