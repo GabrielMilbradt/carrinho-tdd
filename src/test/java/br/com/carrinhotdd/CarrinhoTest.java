@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class CarrinhoTest {
 
     @Test
-    void aplicarCupomDeveReduzirTotal()
+    void naoDeveAplicarMesmoCupomDuasVezes()
             throws EstoqueInsuficienteException,
             CupomJaAplicadoException {
 
@@ -31,6 +31,9 @@ class CarrinhoTest {
 
         carrinho.aplicarCupom(cupom);
 
-        assertEquals(90.0, carrinho.calcularTotal());
+        assertThrows(
+                CupomJaAplicadoException.class,
+                () -> carrinho.aplicarCupom(cupom)
+        );
     }
 }
