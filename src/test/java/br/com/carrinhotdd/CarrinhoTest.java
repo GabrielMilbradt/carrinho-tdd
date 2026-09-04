@@ -1,5 +1,6 @@
 package br.com.carrinhotdd;
 
+import br.com.carrinhotdd.exceptions.CupomJaAplicadoException;
 import br.com.carrinhotdd.exceptions.EstoqueInsuficienteException;
 import org.junit.jupiter.api.Test;
 
